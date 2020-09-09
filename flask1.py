@@ -1,80 +1,31 @@
-# import necessary libraries
-from models import create_classes
-import os
-from flask import (
-    Flask,
-    render_template,
-    jsonify,
-    request,
-    redirect)
-
-#################################################
-# Flask Setup
-#################################################
+# Python SQL toolkit and Object Relational Mapper
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, inspect
+from flask import Flask, jsonify
+import pandas as pd
+import json
 app = Flask(__name__)
 
-#################################################
-# Database Setup
-#################################################
+engine = create_engine("postgres://cxqoiyqtnoanqo:fad124c7b10ff6e492b6513fd54bc446b3ca6fd46b958200a1f05828504b4930@ec2-54-160-120-28.compute-1.amazonaws.com:5432/de5lod0g63lbce", echo=False)
 
-from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://zkgjehjoimrxjj:075c60a0fae0d5ecfc2485fe2969aa3c55aec4512b9f0c62c13356f99c06020d@ec2-3-223-9-166.compute-1.amazonaws.com:5432/d8mj4582vetqdb') or "sqlite:///db.sqlite"
+conn = engine.connect()
 
-# Remove tracking modifications
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+data1  = pd.read_sql("select * from daily_data where ticker in ('MMM','AXP','AMGN','AAPL','BA','CAT','CVX','CSCO','KO','DOW','GS','HD','HON','IBM','INTC','JNJ','JPM','MCD','MRK','MSFT','NKE','PG','CRM','TRV','UNH','VZ','V','WBA','WMT','DIS') AND date_close > '2017/01/01'",conn)
 
-db = SQLAlchemy(app)
+result=data1.to_json(orient='index')
+parsed = json.loads(result)
 
-Pet = create_classes(db)
 
-# create route that renders index.html template
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return "Blank for now"
 
-
-# Query the database and send the jsonified results
-@app.route("/send", methods=["GET", "POST"])
-def send():
-    if request.method == "POST":
-        name = request.form["petName"]
-        lat = request.form["petLat"]
-        lon = request.form["petLon"]
-
-        pet = Pet(name=name, lat=lat, lon=lon)
-        db.session.add(pet)
-        db.session.commit()
-        return redirect("/", code=302)
-
-    return render_template("form.html")
-
-
-@app.route("/api/pals")
-def pals():
-    results = db.session.query(Pet.name, Pet.lat, Pet.lon).all()
-
-    hover_text = [result[0] for result in results]
-    lat = [result[1] for result in results]
-    lon = [result[2] for result in results]
-
-    pet_data = [{
-        "type": "scattergeo",
-        "locationmode": "USA-states",
-        "lat": lat,
-        "lon": lon,
-        "text": hover_text,
-        "hoverinfo": "text",
-        "marker": {
-            "size": 50,
-            "line": {
-                "color": "rgb(8,8,8)",
-                "width": 1
-            },
-        }
-    }]
-
-    return jsonify(pet_data)
-
+@app.route("/jsonified")
+def jsonified():
+    return jsonify(parsed)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
