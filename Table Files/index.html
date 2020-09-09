@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+</head>
+<body>
+    <div class="container">
+        <div class="pie"></div>
+        <div class="row">
+            <div class="table">
+                <div class="col-md-12">
+                    <table id="table_id" class="display">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Company</th>
+                                <th>Ticker</th>
+                                <th>Open</th>
+                                <th>Low</th>
+                                <th>High</th>
+                                <th>Close</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="timeSeries"></div>
+        <div class="banner"></div>
+
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="table.js"></script>
+</body>
