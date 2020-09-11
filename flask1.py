@@ -1,4 +1,4 @@
-# Python SQL toolkit and Object Relational Mapper
+
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -12,20 +12,32 @@ engine = create_engine("postgres://cxqoiyqtnoanqo:fad124c7b10ff6e492b6513fd54bc4
 
 conn = engine.connect()
 
-data1  = pd.read_sql("select * from daily_data where ticker in ('MMM','AXP','AMGN','AAPL','BA','CAT','CVX','CSCO','KO','DOW','GS','HD','HON','IBM','INTC','JNJ','JPM','MCD','MRK','MSFT','NKE','PG','CRM','TRV','UNH','VZ','V','WBA','WMT','DIS') AND date_close > '2017/01/01'",conn)
+data1  = pd.read_sql("select a.*, b.security_name as company from daily_data a join ticker_security b on a.ticker=b.ticker where djia30=true and date_close = (select max(date_close) from daily_data)",conn)
+
+data2  = pd.read_sql("select a.*, b.security_name as company from daily_data a join ticker_security b on a.ticker=b.ticker where djia30=true and date_close > '2017/01/01'",conn)
 
 result=data1.to_json(orient='index')
 parsed = json.loads(result)
 
+result2=data2.to_json(orient='index')
+parsed2 = json.loads(result2)
 
 
 @app.route("/")
 def home():
     return "Blank for now"
 
-@app.route("/jsonified")
-def jsonified():
+
+@app.route("/max_date")
+def max_date():
     return jsonify(parsed)
+
+@app.route("/time_series")
+def time_series():
+    return jsonify(parsed2)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
