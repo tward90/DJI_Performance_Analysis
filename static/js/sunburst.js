@@ -1,3 +1,5 @@
+function init() {
+
 const width = 1000;
 const height = 1000;
 const margin = 50;
@@ -237,3 +239,5 @@ format = d3.format(",d")
 
 
 update()
+}
+init();
