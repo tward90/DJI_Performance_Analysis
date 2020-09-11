@@ -2,7 +2,10 @@
 // const djiStocks = ['AXP', 'AMGN', 'AAPL', 'BA', 'CAT', 'CSCO', 'CVX', 'GS', 'HD', 'HON', 'IBM', 'INTC', 'JNJ', 'KO', 'JPM', 'MCD', 'MMM', 'MRK', 'MSFT', 'NKE', 
 //                     'PG', 'TRV', 'UNH', 'CRM', 'VZ', 'V', 'WBA', 'WMT', 'DIS', 'DOW']
 
-const jsonLink = 'http://127.0.0.1:5000/jsonified'
+// const jsonLink = 'http://127.0.0.1:5000/jsonified/'
+
+const jsonLink = 'https://pet-pal88.herokuapp.com/max_date'
+
 
 const tbody = d3.select("tbody");
 
@@ -12,19 +15,26 @@ d3.json(jsonLink).then(djiData => {
 
     // console.log(data)
     
-    data.forEach(day => {
-        var row = tbody.append("tr");
-        row.append('td').text(new Date(day['date_close']));
-        row.append('td').text(day['ticker']);
+    data.forEach(stock_day => {
+
+        let row = tbody.append("tr");
+        let date = new Date(stock_day['date_close']);
+        let day = date.getDate() + 1
+        let month = date.getMonth() + 1
+        let year = date.getFullYear()
+        row.append('td').text(year + "-" + month + "-" + day);
+        row.append('td').text(stock_day['company']);
+        row.append('td').text(stock_day['ticker']);
+        row.append('td').text(stock_day['open']);
+        row.append('td').text(stock_day['low']);
+        row.append('td').text(stock_day['high']);
+        row.append('td').text(stock_day['close']);
+        row.append('td').text(stock_day['volume']);
 
         // Object.entries(day).forEach(([key, value]) => {
         //         row.append("td").text(value['']);
         // });
     })
-
-    // function formatItem(item) {
-    //   return '<td>'+item.date_close + '</td> <td> ' + item.ticker + ' </td><td>' + item.open+'</td><td>'+item.low + '</td> <td> ' + item.high + ' </td><td>' + item.close+'</td><td>' + item.volume + '</td>';
-    //   }
 
     $(document).ready( function () {
       $('#stock_data').DataTable();
