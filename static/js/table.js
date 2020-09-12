@@ -1,8 +1,13 @@
-const jsonLink = 'https://pet-pal88.herokuapp.com/max_date'
+// const jsonLink = 'https://pet-pal88.herokuapp.com/max_date'
+
+const jsonLink = '/jsonified'
 
 const tbody = d3.select("tbody");
 
-d3.json(jsonLink).then(djiData => {
+d3.json(jsonLink)
+// d3.json(jsonLink, {headers: new Headers({ RequestMode : "no-cors"})})
+    // .header({'Access-Control-Allow-Origin': 'https://pet-pal88.herokuapp.com/max_date'})
+    .then(djiData => {
 
     const data = Object.values(djiData)
 
