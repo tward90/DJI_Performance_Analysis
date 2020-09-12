@@ -1,6 +1,6 @@
 // const jsonLink = 'https://pet-pal88.herokuapp.com/max_date'
 
-const jsonLink = '/jsonified'
+const jsonLink = '/max_date'
 
 const tbody = d3.select("tbody");
 
