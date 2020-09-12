@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Data Visualization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href='static/css/style.css'>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Home</a>
+            </div>
+        </div>
+    </nav>
+    <div class="text-center hero">
+        <h1>Dow Jones Index Historical Dashboard</h1>
+        <p>An in-depth look at the DJI performance between 2017 & 2018</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="sunburst"></div>
+            </div> 
+        </div>  
+        <div class="row">
+            <div class="table">
+                <div class="col-md-12">
+                    <table id="stock_data" class="display">
+                        <thead>
+                            <tr>
+                                <th>Date (YYYY-M-D)</th>
+                                <th>Company</th>
+                                <th>Ticker</th>
+                                <th>Open</th>
+                                <th>Low</th>
+                                <th>High</th>
+                                <th>Close</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="timeSeries"></div>
+        <div class="banner"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="static/js/table.js"></script>
+    <script type="text/javascript" src="static/js/sunburst.js"></script>
+</body>
