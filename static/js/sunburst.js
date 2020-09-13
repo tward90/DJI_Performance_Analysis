@@ -1,9 +1,35 @@
-const width = 1000;
-const height = 1000;
+function init () {
+
+let width = document.getElementById("sunburstID").clientWidth;
+let height = width;
+console.log (width)
+console.log (height)
 const margin = 50;
+let radius = Math.min(width, height) / 6 - margin;
 
-const radius = Math.min(width, height) / 6 - margin;
+// window.addEventListener('resize', function(event) {
+//         let width = d3.select("#sunburstID").clientWidth
+//         let height = d3.select("#sunburstID").clientHeight
+//         console.log (width)
+//         console.log (height)
+//         d3.select(".sunburst")
+//         .attr("height", height)
+//         .attr("width", width)
+// })
 
+function resize () {
+        width = document.getElementById("sunburstID").clientWidth;
+        height = width;
+        radius = Math.min(width, height) / 6 - margin;
+        console.log (width)
+        console.log (height)
+        console.log (radius)
+        d3.select(".sunburst").select("svg")
+        .attr("height", height)
+        .attr("width", width)
+    }
+
+// if (!d3.select("#pieSvg"))   
 const svg = d3.select(".sunburst")
     .append("svg")
         .attr("width", width)
@@ -11,12 +37,8 @@ const svg = d3.select(".sunburst")
         .attr("id", "pieSvg")
     .append("g")
         .attr("pointer-events", "all")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    // .on("mouseleave", () => {
-    //     d3.selectAll("path")
-    //         .attr("fill-opacity", 1)
-    // })
-
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+        .attr("id", "gID");
 
 
 const data = {
@@ -237,3 +259,8 @@ format = d3.format(",d")
 
 
 update()
+}
+
+init()
+
+window.onresize = init

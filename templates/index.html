@@ -10,19 +10,24 @@
 </head>
 <body>
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Home</a>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between align-items-center breaking-news bg-white">
+                        <!-- <div class="d-flex flex-row flex-grow-1 flex-fill justify-content-center bg-danger py-2 text-white px-1 news"><span class="d-flex align-items-center">&nbsp;CNN News</span></div> -->
+                        <marquee class="news-scroll" behavior="scroll" direction="left"> <a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span> <a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span> <a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span></marquee>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
     <div class="text-center hero">
-        <h1>Dow Jones Index Historical Dashboard</h1>
-        <p>An in-depth look at the DJI performance between 2017 & 2018</p>
+        <h1>Historical Stock Index Dashboard</h1>
+        <p>An in-depth look at the NYSE index performance between 2017 & 2018</p>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-10" id="sunburstID">
                 <div class="sunburst"></div>
             </div> 
         </div>  

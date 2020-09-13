@@ -11,7 +11,7 @@ d3.json(jsonLink)
 
     const data = Object.values(djiData)
 
-    console.log(data)
+    // console.log(data)
     
     data.forEach(stock_day => {
 
