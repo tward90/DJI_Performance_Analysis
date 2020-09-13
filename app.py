@@ -3,7 +3,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, inspect
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 import pandas as pd
 import json
 app = Flask(__name__)
@@ -37,7 +37,9 @@ parsed4 = json.loads(result4)
 result5=data5.to_json(orient='index')
 parsed5 = json.loads(result5)
 
-
+@app.route("/")
+def home():
+    return render_template('index.html')
 
 
 @app.route("/max_date")
