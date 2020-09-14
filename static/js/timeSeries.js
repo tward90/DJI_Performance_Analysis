@@ -1,4 +1,4 @@
-function init() {
+function initTimeSeries() {
     let width = document.getElementById("timeSeriesID").clientWidth;
     // let width = 1000;
     let height = width;
@@ -12,13 +12,34 @@ function init() {
             .attr("id", "timeSeriesSvg")
 
     const g = svg.append("g")
+        .attr("id", "timeSeriesGroupID")
         .attr("font-size", 16)
         .attr("fill", "none")
         .attr("stroke-width", 1.5)
         .attr("stroke-miterlimit", 1)
 
+    d3.select(".timeSeries").append("button")
+        .text("DOW")
+        .property("value", "/time_series")
+        .on("click", redraw);
 
-    d3.json("/fang_time_series").then( timeData => {
+    d3.select(".timeSeries").append("button")
+        .text("Fang")
+        .property("value", "/fang_time_series")
+        .on("click", redraw)
+
+    function redraw() {
+        let apiString = this.value ? this.value : "/time_series";
+        // const apiString = this.value;
+        console.log(apiString);
+        d3.select("#timeSeriesGroupID").selectAll("*").remove();
+
+
+    
+
+    
+
+    d3.json(apiString).then( timeData => {
         const dataRecords = Object.values(timeData);
         const data = d3.group(dataRecords, d=> d.ticker);
 
@@ -27,7 +48,7 @@ function init() {
         for (const[key, values] of data) {
             dataArr.push(values);
         }
-
+        console.log(dataArr);
 
         const dateMin = d3.min(
             d3.min(dataArr.map(d => d.map(j => j.date_close)))
@@ -116,6 +137,7 @@ function init() {
         // window.onresize = resize;
 
         const legendText = g.append("g")
+            .attr("class", "legendTimeSeries")
             .attr("transform", `translate(${margin}, ${margin/2})`)
             .selectAll("text")
             .data(dataArr)
@@ -127,6 +149,7 @@ function init() {
                 .attr("fill", "black")
         
         const legendColor = g.append("g")
+            .attr("class", "legendTimeSeries")
             .attr("transform", `translate(${margin}, ${margin/2})`)
             .selectAll("rect")
             .data(dataArr)
@@ -150,7 +173,7 @@ function init() {
                     .attr("stroke", color.get(values[0].ticker))
                     .attr("stroke-dasharray", `0,${this.getTotalLength}`)
                 .transition()
-                    .duration(500)
+                    .duration(200)
                     .ease(d3.easeLinear)
                     .attr("stroke-dasharray", function() {
                         const length = this.getTotalLength();
@@ -174,7 +197,7 @@ function init() {
                     
 
                 
-            }, 500*i);
+            }, 200*i);
             
         })
 
@@ -234,7 +257,7 @@ function init() {
                         .attr("stroke", color.get(values[0].ticker))
                         .attr("stroke-dasharray", `0,${this.getTotalLength}`)
                     .transition()
-                        .duration(500)
+                        .duration(200)
                         .ease(d3.easeLinear)
                         .attr("stroke-dasharray", function() {
                             const length = this.getTotalLength();
@@ -258,18 +281,26 @@ function init() {
                         
     
                     
-                }, 500*i);
+                }, 200*i);
                 
             })
             
             
         }
-        window.onresize += resizeTimeSeries;
+        window.onresize = resizeTimeSeries;
+        d3.select("#timeReset").remove();
 
+        d3.select(".timeSeries")
+        .append("button")
+        .attr("id", "timeReset")
+        .on("click", resizeTimeSeries)
+        .text("reset");  
+             
     })
-
-
+    }
+    redraw();
+    
 
 }
-init();
+initTimeSeries();
 

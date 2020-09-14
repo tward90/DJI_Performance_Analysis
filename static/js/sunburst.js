@@ -1,4 +1,4 @@
-function init() {
+function initSun() {
 
 let width = document.getElementById("sunburstID").clientWidth;
 let height = width;
@@ -236,13 +236,5 @@ format = d3.format(",d")
 
 update()
 }
-init();
+initSun();
 
-function resizeSun() {
-    console.log("resize")
-    d3.select(".sunburst").selectAll("*").remove();
-
-    init();
-}
-
-window.onresize += resizeSun;
