@@ -1,13 +1,15 @@
 
 
-const jsonLink = '/max_date'
+const jsonLink = "/max_date"
 
 const tbody = d3.select("tbody");
 
 d3.json(jsonLink).then(djiData => {
 
+    // console.log(djiData);
+
     const data = Object.values(djiData)
-    
+
     data.forEach(stock_day => {
 
         let row = tbody.append("tr");

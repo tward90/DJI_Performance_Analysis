@@ -2,8 +2,8 @@ function init () {
 
 let width = document.getElementById("sunburstID").clientWidth;
 let height = width;
-console.log (width)
-console.log (height)
+// console.log (width)
+// console.log (height)
 const margin = 50;
 let radius = Math.min(width, height) / 6 - margin;
 
