@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href='static/css/style.css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container mt-5">
+    <div class="container-fluid">
+        <div class="banner">
             <div class="row">
                 <div class="col-md-12">
                     <div class="d-flex justify-content-between align-items-center breaking-news bg-white">
-                        <!-- <div class="d-flex flex-row flex-grow-1 flex-fill justify-content-center bg-danger py-2 text-white px-1 news"><span class="d-flex align-items-center">&nbsp;CNN News</span></div> -->
-                        <marquee class="news-scroll" behavior="scroll" direction="left"> <a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span> <a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span> <a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span><a>Test 1</a> <span class="dot"></span> <a>Test2 </a> <span class="dot"></span> <a>Test3</a><span class="dot"></span></marquee>
+                        <marquee class="news-scroll" behavior="scroll" direction="left"></marquee>
                     </div>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
     <div class="text-center hero">
         <h1>Historical Stock Index Dashboard</h1>
         <p>An in-depth look at the NYSE index performance between 2017 & 2018</p>
@@ -53,7 +53,6 @@
             </div>
         </div>
         <div class="timeSeries"></div>
-        <div class="banner"></div>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -61,4 +60,5 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="static/js/table.js"></script>
     <script type="text/javascript" src="static/js/sunburst.js"></script>
+    <script type="text/javascript" src="static/js/ticker.js"></script>
 </body>

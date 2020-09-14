@@ -1,17 +1,12 @@
-// const jsonLink = 'https://pet-pal88.herokuapp.com/max_date'
+
 
 const jsonLink = '/max_date'
 
 const tbody = d3.select("tbody");
 
-d3.json(jsonLink)
-// d3.json(jsonLink, {headers: new Headers({ RequestMode : "no-cors"})})
-    // .header({'Access-Control-Allow-Origin': 'https://pet-pal88.herokuapp.com/max_date'})
-    .then(djiData => {
+d3.json(jsonLink).then(djiData => {
 
     const data = Object.values(djiData)
-
-    // console.log(data)
     
     data.forEach(stock_day => {
 
@@ -29,9 +24,6 @@ d3.json(jsonLink)
         row.append('td').text(stock_day['close']);
         row.append('td').text(stock_day['volume']);
 
-        // Object.entries(day).forEach(([key, value]) => {
-        //         row.append("td").text(value['']);
-        // });
     })
 
     $(document).ready( function () {
