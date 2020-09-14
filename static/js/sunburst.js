@@ -1,6 +1,6 @@
-const width = 1000;
-const height = 1000;
-const margin = 50;
+const width = document.getElementById("sunburstID");
+const height = width;
+const margin = width/20;
 
 const radius = Math.min(width, height) / 6 - margin;
 
