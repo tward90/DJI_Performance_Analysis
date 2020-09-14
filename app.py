@@ -1,4 +1,3 @@
-
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -40,6 +39,18 @@ parsed5 = json.loads(result5)
 @app.route("/")
 def home():
     return render_template('index.html')
+
+@app.route("/djia30")
+def djia30():
+    return render_template('index.html')
+
+@app.route("/fang8")
+def fang8():
+    return render_template('fang8.html')
+
+@app.route("/sunburst")
+def sunburst():
+    return render_template('sunburst.html')
 
 
 @app.route("/max_date")
