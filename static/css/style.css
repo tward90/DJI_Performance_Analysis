@@ -1,3 +1,6 @@
+.d-flex  {
+ color : white;
+}
 .table {
     height: 1000px;
     overflow-y: auto;
