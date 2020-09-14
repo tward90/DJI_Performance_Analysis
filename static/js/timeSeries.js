@@ -1,6 +1,6 @@
 function init() {
-    // let width = document.getElementById("timeSeriesID").clientWidth;
-    let width = 1000;
+    let width = document.getElementById("timeSeriesID").clientWidth;
+    // let width = 1000;
     let height = width;
     const margin = 100;
 
@@ -22,14 +22,11 @@ function init() {
         const dataRecords = Object.values(timeData);
         const data = d3.group(dataRecords, d=> d.ticker);
 
-        console.log(data)
+        
         let dataArr = [];
         for (const[key, values] of data) {
             dataArr.push(values);
         }
-        
-        // dataArr = dataArr.map(d => d.slice().sort((a,b) => d3.ascending(a.date_close, b.date_close)));
-        
 
 
         const dateMin = d3.min(
@@ -39,34 +36,32 @@ function init() {
             d3.max(dataArr.map(d => d.map(j => j.date_close)))
         );
         
-        // console.log(dataArr.map(d => d.map(j => new Date(j.date_close))));
-        // Calculating the percentage change of the stock closing price from the min date to the current date
-        // console.log(dataArr.map(d => d.find(element => element.ticker === "AAPL")))
-
         dataArr.map(d => {
             let localMin = d3.min(d.map(j => j.date_close));
             let c0 = d.find(element => element.date_close === localMin).close;
-            // console.log(c0)
             d.map(j => {
                 j.deltaClose = ((j.close / c0)-1);
             })
             
             
         })
-        // console.log(dataArr);
         const deltaRange = [];
         dataArr.forEach(d => {
-            // console.log(d3.extent(d.map(j => j.deltaClose)));
             deltaRange.push(d3.extent(d.map(j => j.deltaClose)));
         });
         const dataExtent = d3.extent(deltaRange.flat());
 
 
+        function shiftMonth(date, shift) {
+            let oldDate = new Date(date);
+            return new Date(oldDate.getFullYear(),oldDate.getMonth()+shift,oldDate.getDate())
+        }
+
         let xScale = d3.scaleUtc()
-            .domain([new Date(dateMin), new Date(dateMax)])
+            .domain([shiftMonth(dateMin, 0), shiftMonth(dateMax, 1)])
             .range([margin, width - margin]);
         let yScale = d3.scaleLinear()
-            .domain(dataExtent)
+            .domain([d3.min([-0.2, dataExtent[0]]), dataExtent[1]])
             .range([height - margin, margin]);
 
 
@@ -79,7 +74,9 @@ function init() {
             color.set(d[0].ticker, d3.interpolateViridis(viridisScale(i)))
         })
 
-        console.log(dataArr.map(d => d.map(j => xScale(j.deltaClose))));
+        // Sorting each array of records by the close date (ascending)
+        dataArr.map(d => d.sort(function(a, b) {return d3.ascending(a.date_close, b.date_close)}))
+
 
         let line = d3.line()
             .defined(d => !isNaN(d.deltaClose))
@@ -87,29 +84,36 @@ function init() {
             .y(d => yScale(d.deltaClose));
         
 
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+        
+
+
         // x Axis creation
         g.append("g")
+            .attr("class", "axi")
             .attr("transform", `translate(0, ${yScale(0)})`)
             .style("font-size", 16)
             .call(d3.axisBottom(xScale)
-                .ticks(d3.timeMonth.every(1), "%Y")
+                .ticks(d3.timeMonth.every(3))
+                .tickFormat(d => months[d.getMonth()]+ "-" + d.getFullYear())
                 .tickSizeOuter(0));
 
         // y Axis creation
-        const yAxis = g.append("g")
+        g.append("g")
+            .attr("class", "axi")
             .attr("transform", `translate(${margin},0)`)
             .style("font-size", 16)
             .call(d3.axisLeft(yScale).ticks(null, "%"))
             .call(g => g.select(".domain").remove())
-            .call(g => g.selectAll(".tick:not(:first-of-type) line").clone()
-                .attr("x2", width)
-                );
+            .call(g => g.selectAll(".tick line").clone()
+                .attr("x2", width-2*margin)
+                .attr("stroke-dasharray", "2, 2")
+                .attr("stroke-opacity", 0.5));
 
-        yAxis.attr("stroke-opacity", 0.4);
 
         const legendCols = 2;
 
-        window.onresize = resize;
+        // window.onresize = resize;
 
         const legendText = g.append("g")
             .attr("transform", `translate(${margin}, ${margin/2})`)
@@ -134,14 +138,14 @@ function init() {
             .attr("height", ".9em")
             .attr("fill", d => color.get(d[0].ticker))
 
-            
+        
         
         let i=0;
-        // for(const[key, values] of data) {
         dataArr.forEach(values => {
             i++;
             setTimeout(function() {
                 g.append("path")
+                    .attr("class", "linePath")
                     .attr("d", line(values))
                     .attr("stroke", color.get(values[0].ticker))
                     .attr("stroke-dasharray", `0,${this.getTotalLength}`)
@@ -154,9 +158,10 @@ function init() {
                     })
                     .on("end", function() {
                         g.append("text")
+                            .attr("class", "tickerLabel")
                             .attr("dx", 4)
                             .attr("dy", "0.32em")
-                            .attr("x", xScale(new Date(values[values.length-1].date_close)))
+                            .attr("x", xScale(values[values.length-1].date_close))
                             .attr("y", yScale(values[values.length-1].deltaClose))
                             .text(values[values.length-1].ticker)
                             .attr("font-size", 17)
@@ -169,29 +174,97 @@ function init() {
                     
 
                 
-            }, 1000*i);
+            }, 500*i);
             
         })
 
-        function resize() {
+        function resizeTimeSeries() {
             width = document.getElementById("timeSeriesID").clientWidth;
             height = width/1.6;
             d3.select("#timeSeriesSvg")
                 .attr("width", width)
                 .attr("height", height);
 
-            xScale = d3.scaleUtc([new Date(dateMin), new Date(dateMax)], [margin, width - margin]);
+            xScale = d3.scaleUtc()
+                .domain([shiftMonth(dateMin, 0), shiftMonth(dateMax, 1)])
+                .range([margin, width - margin]);
+
             yScale = d3.scaleLinear()
-                .domain(dataExtent)
+                .domain([d3.min([-0.2, dataExtent[0]]), dataExtent[1]])
                 .range([height-margin, margin]);
 
             line = d3.line()
                 .defined(d => !isNaN(d.deltaClose))
                 .x(d => xScale(new Date(d.date_close)))
                 .y(d => yScale(d.deltaClose));
+
+            g.selectAll(".axi").remove();
+
+            g.append("g")
+                .attr("class", "axi")
+                .attr("transform", `translate(0, ${yScale(0)})`)
+                .style("font-size", 16)
+                .call(d3.axisBottom(xScale)
+                    .ticks(d3.timeMonth.every(3))
+                    .tickFormat(d => months[d.getMonth()]+ "-" + d.getFullYear())
+                    .tickSizeOuter(0));
+    
+            g.append("g")
+                .attr("class", "axi")
+                .attr("transform", `translate(${margin},0)`)
+                .style("font-size", 16)
+                .call(d3.axisLeft(yScale).ticks(null, "%"))
+                .call(g => g.select(".domain").remove())
+                .call(g => g.selectAll(".tick line").clone()
+                    .attr("x2", width-2*margin)
+                    .attr("stroke-dasharray", "2, 2")
+                    .attr("stroke-opacity", 0.5));
+
+
+
+            g.selectAll(".linePath").remove();
+            g.selectAll(".tickerLabel").remove();
+            let i=0;
+            dataArr.forEach(values => {
+                i++;
+                setTimeout(function() {
+                    g.append("path")
+                        .attr("class", "linePath")
+                        .attr("d", line(values))
+                        .attr("stroke", color.get(values[0].ticker))
+                        .attr("stroke-dasharray", `0,${this.getTotalLength}`)
+                    .transition()
+                        .duration(500)
+                        .ease(d3.easeLinear)
+                        .attr("stroke-dasharray", function() {
+                            const length = this.getTotalLength();
+                            return `${length},${length}`
+                        })
+                        .on("end", function() {
+                            g.append("text")
+                                .attr("class", "tickerLabel")
+                                .attr("dx", 4)
+                                .attr("dy", "0.32em")
+                                .attr("x", xScale(values[values.length-1].date_close))
+                                .attr("y", yScale(values[values.length-1].deltaClose))
+                                .text(values[values.length-1].ticker)
+                                .attr("font-size", 17)
+                                .attr("font-weight", "bold")
+                            .transition()
+                                .attr("fill", color.get(values[0].ticker))
+                                
+                                
+                        })
+                        
+    
+                    
+                }, 500*i);
+                
+            })
+            
             
         }
-        window.onresize = resize;
+        window.onresize += resizeTimeSeries;
 
     })
 

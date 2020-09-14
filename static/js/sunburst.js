@@ -1,8 +1,10 @@
-const width = document.getElementById("sunburstID");
-const height = width;
-const margin = width/20;
+function init() {
 
-const radius = Math.min(width, height) / 6 - margin;
+let width = document.getElementById("sunburstID").clientWidth;
+let height = width;
+let margin = width/20;
+
+let radius = Math.min(width, height) / 6 - margin;
 
 const svg = d3.select(".sunburst")
     .append("svg")
@@ -12,10 +14,6 @@ const svg = d3.select(".sunburst")
     .append("g")
         .attr("pointer-events", "all")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    // .on("mouseleave", () => {
-    //     d3.selectAll("path")
-    //         .attr("fill-opacity", 1)
-    // })
 
 
 
@@ -237,3 +235,14 @@ format = d3.format(",d")
 
 
 update()
+}
+init();
+
+function resizeSun() {
+    console.log("resize")
+    d3.select(".sunburst").selectAll("*").remove();
+
+    init();
+}
+
+window.onresize += resizeSun;
