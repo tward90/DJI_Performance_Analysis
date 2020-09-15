@@ -1,3 +1,4 @@
+
 function initTimeSeries() {
     let width = document.getElementById("timeSeriesID").clientWidth;
     // let width = 1000;
