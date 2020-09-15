@@ -1,9 +1,10 @@
 .d-flex  {
- color : white;
+ color : #7482a6;
 }
 .table {
     height: 1000px;
     overflow-y: auto;
+    background-color: #2d3554;
   }
 .hero {
   position: relative;
@@ -19,11 +20,15 @@
 }
 
 .news {
-  width: 160px
+  width: 160px;
+  background-color: #1e243b;
+  color: #c8cddc;
 }
 
 .news-scroll a {
-  text-decoration: none
+  text-decoration: none;
+  background-color: #1e243b;
+  color: #c8cddc;
 }
 
 .green_arrow {
@@ -82,4 +87,94 @@ margin-left: 0;
 #wrapper.toggled #sidebar-wrapper {
   margin-left: -15rem;
 }
+}
+
+.header-title {
+  font-size: 1.1rem;
+  color:  #c8cddc;
+  margin: 10px 0 0 0;
+    
+}
+h4 {
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+}
+
+.card-box {
+  background-color: #222841;
+  color: #c8cddc;
+  padding: 1.25rem;
+  margin-bottom: 24px;
+
+}
+
+body {
+  color: #7482a6;
+  background-color: #1e243b;
+  padding-bottom: 60px;
+}
+
+.left-side-menu {
+  background: #222841;
+  top: 50px;
+  box-shadow: 0 0 35px 0 rgba(0, 0, 0, .15);
+}
+
+html {
+  font-family: sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.left-menu-ul {
+  background-color: #2d3554;
+  color: #fff;
+  display: block;
+}
+
+.side-item {
+  background-color: transparent;
+  color: #c8cddc;
+}
+
+.sector-button {
+  background-color: #2d3554;
+  color: #7482a6;
+}
+
+.sector-button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: #222841;
+  color: #c8cddc;
+}
+
+table.dataTable tbody {
+  background-color: #7482a6 !important;
+  color: #1e243b !important;
+}
+
+tr.odd > .sorting_1 {
+  background-color: #7482a6 !important;
+}
+tr.odd {
+  background-color: #7482a6 !important;
+}
+
+tr.even {
+  background-color: #c8cddc !important;
+}
+tr.even > .sorting_1 {
+  background-color: #c8cddc !important;
+}
+
+label {
+  color: #c8cddc;
+}
+
+a.paginate_button {
+  background-color: #7482a6 !important;
+}
+
+.sunLabel {
+  stroke: #222841;
 }

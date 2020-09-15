@@ -1,7 +1,7 @@
 function initSun() {
 
 let width = document.getElementById("sunburstID").clientWidth;
-let height = width;
+let height = width/1.2;
 let margin = width/20;
 
 let radius = Math.min(width, height) / 6 - margin;
@@ -20,7 +20,7 @@ const svg = d3.select(".sunburst")
 const data = {
     name: "DOW Sectors", children: [
         {
-            name: "Aerospace/Defense",
+            name: "Aerospace",
             children: [
                 {name: "Boeing", value: 4.04}
             ]
@@ -67,7 +67,7 @@ const data = {
             ]
         },
         {
-            name: "Information Technology",
+            name: "Technology",
             children: [
                 {name: "Apple Inc.", value: 2.87},
                 {name: "Cisco Systems", value: 0.97},
@@ -121,7 +121,7 @@ function partition(d) {
 
 
 
-color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1))
+color = d3.scaleOrdinal(d3.quantize(d3.interpolateCool, data.children.length + 1))
 
 arc = d3.arc()
     .startAngle(d => d.x0)
@@ -145,7 +145,7 @@ function update() {
         .data(root.descendants().slice(1))
         .join("path")
             .attr("fill", d => {while (d.depth > 1) d = d.parent; return color(d.data.name); })
-            .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
+            .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.8 : 0.6) : 0)
             .attr("d", d => arc(d.current))
             .on("mouseover", event => {
                 d3.select(event.target)
@@ -153,7 +153,7 @@ function update() {
             })
             .on("mouseout", event => {
                 d3.select(event.target)
-                    .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
+                    .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.8 : 0.6) : 0)
             });
         
     path.filter(d => d.children)
@@ -174,7 +174,8 @@ function update() {
         .attr("fill-opacity", d => +labelVisible(d.current))
         .attr("transform", d => labelTransform(d.current))
         .text(d => d.data.name)
-            .attr("font-size", 12);
+            .attr("font-size", 12)
+            .attr("class", "sunLabel");
 
     const parent = svg.append("circle")
         .datum(root)

@@ -9,12 +9,12 @@
     <link rel="stylesheet" type="text/css" href='static/css/style.css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-<body class="bg-light">
+<body>
     <div class="container-fluid">
         <div class="banner">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="d-flex justify-content-between align-items-center breaking-news bg-white">
+                    <div class="d-flex justify-content-between align-items-center breaking-news">
                         <marquee class="news-scroll" behavior="scroll" direction="left"></marquee>
                     </div>
                 </div>
@@ -22,33 +22,33 @@
         </div>
     </div>
     <div class="text-center hero">
-        <h1>Historical Stock Index Dashboard</h1>
+        <h1>Dow Jones Industrial Average</h1>
         <p>An in-depth look at the NYSE index performance between 2017 & 2018</p>
     </div>
     <div class="d-flex" id="wrapper">
-        <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="border-right left-side-menu" id="sidebar-wrapper">
           <div class="list-group list-group-flush">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column left-menu-ul">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">
+                    <a class="nav-link active side-item" href="/">
                         <i class="material-icons sidebarIcon" >home</i>  Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/sunburst">
+                    <a class="nav-link active side-item" href="/sunburst">
                         DJIA 30 Sector Breakdown
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/djia30">
+                    <a class="nav-link active side-item" href="/djia30">
                         DJIA 30 Time Series
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/fang8">
+                    <a class="nav-link active side-item" href="/fang8">
                         FANG+ Tech Index Time Series
                         <span class="sr-only">(current)</span>
                     </a>
@@ -57,7 +57,7 @@
            
 
                 <li class = "nav-item"> 
-                    <a class="nav-link" href="https://www.reddit.com/r/wallstreetbets/" target = "_blank" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link side-item" href="https://www.reddit.com/r/wallstreetbets/" target = "_blank" aria-haspopup="true" aria-expanded="false">
                         Additional Resources
                     </a>
                 </li>
@@ -65,12 +65,12 @@
           </div>
         </div>
         <div class="container">
-            <div role="main" class="col-md-10" id="sunburstID">
-                <div class="sunburst"></div>
+            <div role="main" class="col-md-12" id="sunburstID">
+                <div class="sunburst card-box"></div>
             </div>
             <div class="col-md-12">
-                <div class="table">
-                    <!-- <table id="stock_data" class="display">
+                <div class="table card-box">
+                    <table id="stock_data" class="display">
                         <thead>
                             <tr>
                                 <th>Date (YYYY-M-D)</th>
@@ -84,7 +84,7 @@
                             </tr>
                         </thead>
                         <tbody></tbody>
-                    </table> -->
+                    </table>
                 </div>
             </div>
         </div>  
@@ -95,7 +95,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    <!-- <script type="text/javascript" src="static/js/table.js"></script> -->
+    <script type="text/javascript" src="static/js/table.js"></script>
+    <!-- <script type="text/javascript" src="static/js/timeSeries.js"></script> -->
     <script type="text/javascript" src="static/js/sunburst.js"></script>
     <script type="text/javascript" src="static/js/ticker.js"></script>
 </body>
