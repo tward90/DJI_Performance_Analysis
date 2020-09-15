@@ -40,7 +40,7 @@ def home():
 
 @app.route("/djia30")
 def djia30():
-    return render_template('index.html')
+    return render_template('djia30.html')
 
 @app.route("/fang8")
 def fang8():
