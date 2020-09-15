@@ -205,7 +205,7 @@ function initTimeSeries() {
             .attr("class", "header-title mb-4")
             .text(() => {
 
-                return apiString === "/fang_time_series" ? "Fang 8 Stock Group" :
+                return apiString === "/fang_time_series" ? "Fang+  Stock Group" :
                     sector === "none" ? "DOW Jones" : `DOW Sector: ${sector}`
 
             })
