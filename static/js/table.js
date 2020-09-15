@@ -16,7 +16,8 @@ const sectorMap = new Map();
       {"Information Technology": ["AAPL", "CSCO", "IBM", "INTC", "MSFT", "CRM"]},
       {"Health Care": ["UNH"]},
       {"Petro-Chemical": ["CVX", "DOW"]},
-      {"Pharmaceuticals": ["AMGN", "JNJ", "MRK"]}
+      {"Pharmaceuticals": ["AMGN", "JNJ", "MRK"]},
+      {"Telecommunication": ["VZ"]}
   ];
   sectorData.map(d => {
     Object.values(d)[0].map(v => {
