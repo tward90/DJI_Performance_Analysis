@@ -21,20 +21,18 @@ data4  = pd.read_sql("select a.*, b.security_name as company from daily_data a j
 
 data5  = pd.read_sql("with last_day as(select a.*, b.security_name as company from daily_data a join ticker_security b on a.ticker=b.ticker where sp500=true and date_close = (select max(date_close) from daily_data)),prior_day as(select a.*, b.security_name as company from daily_data a join ticker_security b on a.ticker=b.ticker where sp500=true and date_close = (select max(date_close-1) from daily_data))select a.ticker, a.date_close, b.date_close as prior_date_close, a.close, b.close as prior_close, (a.close-b.close)/b.close as pcnt_change, a.company from last_day a join prior_day b on a.ticker=b.ticker",conn)
 
-result=data1.to_json(orient='index')
-parsed = json.loads(result)
 
-result2=data2.to_json(orient='index')
-parsed2 = json.loads(result2)
+fin_serv  = pd.read_sql("select a.*, b.security_name as company from daily_data a join ticker_security b on a.ticker=b.ticker where a.ticker in ('V','GS','TRV','JPM','AXP') and date_close > '2017/01/01'",conn)
 
-result3=data3.to_json(orient='index')
-parsed3 = json.loads(result3)
 
-result4=data4.to_json(orient='index')
-parsed4 = json.loads(result4)
+queries = [data1,data2,data3,data4,data5,fin_serv]
+result =[]
+parsed = []
 
-result5=data5.to_json(orient='index')
-parsed5 = json.loads(result5)
+for x in range(len(queries)):
+    result.append(queries[x].to_json(orient='index'))
+    parsed.append(json.loads(result[x]))
+
 
 @app.route("/")
 def home():
@@ -55,23 +53,27 @@ def sunburst():
 
 @app.route("/max_date")
 def max_date():
-    return jsonify(parsed)
+    return jsonify(parsed[1])
 
 @app.route("/time_series")
 def time_series():
-    return jsonify(parsed2)
+    return jsonify(parsed[1])
 
 @app.route("/fang_max_date")
 def fang_max_date():
-    return jsonify(parsed3)
+    return jsonify(parsed[2])
 
 @app.route("/fang_time_series")
 def fang_time_series():
-    return jsonify(parsed4)
+    return jsonify(parsed[3])
 
 @app.route("/ticker")
 def ticker():
-    return jsonify(parsed5)
+    return jsonify(parsed[4])
+
+@app.route("/fin_serv")
+def fin_services():
+    return jsonify(parsed[5])
 
 
 if __name__ == "__main__":
