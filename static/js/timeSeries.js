@@ -29,8 +29,10 @@ function initTimeSeries() {
         .on("click", redraw)
 
     function redraw() {
-        let apiString = this.value ? this.value : "/time_series";
-        // const apiString = this.value;
+
+        let apiString = window.location.href.includes("/djia30")  ? "/time_series" :
+            window.location.href.includes("/fang8") ? "/fang_time_series" : "/time_series"
+
         console.log(apiString);
         d3.select("#timeSeriesGroupID").selectAll("*").remove();
 
@@ -86,13 +88,20 @@ function initTimeSeries() {
             .range([height - margin, margin]);
 
 
-        const viridisScale = d3.scaleLinear()
+        // const viridisScale = d3.scaleLinear()
+        //     .domain([0, dataArr.length])
+        //     .range([0, 1])
+        const tableauScale = d3.scaleOrdinal()
             .domain([0, dataArr.length])
-            .range([0, 1])
+            .range(d3.schemeTableau10)
 
+        // const color = new Map();
+        // dataArr.forEach((d, i) => {
+        //     color.set(d[0].ticker, d3.interpolateViridis(viridisScale(i)))
+        // })
         const color = new Map();
         dataArr.forEach((d, i) => {
-            color.set(d[0].ticker, d3.interpolateViridis(viridisScale(i)))
+            color.set(d[0].ticker, tableauScale(i))
         })
 
         // Sorting each array of records by the close date (ascending)
@@ -134,7 +143,6 @@ function initTimeSeries() {
 
         const legendCols = 2;
 
-        // window.onresize = resize;
 
         const legendText = g.append("g")
             .attr("class", "legendTimeSeries")
