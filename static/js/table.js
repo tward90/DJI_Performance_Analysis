@@ -15,7 +15,7 @@ const sectorMap = new Map();
       {"Food Industry": ["KO", "MCD"]},
       {"Information Technology": ["AAPL", "CSCO", "IBM", "INTC", "MSFT", "CRM"]},
       {"Health Care": ["UNH"]},
-      {"Petro-Chemical": ["CVX", "DOW"]},
+      {"Petro-Chemical": ["CVX", "DWDP"]},
       {"Pharmaceuticals": ["AMGN", "JNJ", "MRK"]},
       {"Telecommunication": ["VZ"]}
   ];

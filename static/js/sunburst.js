@@ -87,7 +87,7 @@ const data = {
             name: "Petro-Chemical",
             children: [
                 {name: "Chevron Corp.", value: 1.97},
-                {name: "Dow Inc.", value: 1.06}
+                {name: "Dow Dupont, Inc.", value: 1.06}
             ]
         },
         {
