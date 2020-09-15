@@ -29,7 +29,8 @@ function initTimeSeries() {
         {"Information Technology": ["AAPL", "CSCO", "IBM", "INTC", "MSFT", "CRM"]},
         {"Health Care": ["UNH"]},
         {"Petro-Chemical": ["CVX", "DOW"]},
-        {"Pharmaceuticals": ["AMGN", "JNJ", "MRK"]}
+        {"Pharmaceuticals": ["AMGN", "JNJ", "MRK"]},
+        {"Telecommunication": ["VZ"]}
     ];
     sectorData.map(d => {
         Object.values(d)[0].map(v => {
@@ -49,12 +50,26 @@ function initTimeSeries() {
             .text(d => Object.keys(d)[0])
             .attr("fill", " #c8cddc")
             .property("value",d => Object.keys(d)[0])
-            .on("click", () => redraw(event.target.value));
+            .on("click", () => {
+                redraw(event.target.value);
+                d3.select("#stock_data_filter").select("input")
+                    .property("value", event.target.value);
+            });
     }
+    
+    d3.select(".timeSeries").append("button")
+        .attr("class", "sector-button")
+        .text("All")
+        .property("value", "none")
+        .on("click", () => {
+            redraw(event.target.value);
+            d3.select("#stock_data_filter").select("input")
+                .property("value", "")
+        })
 
 
     function redraw(sector) {
-        console.log(sector);
+        // console.log(sector);
         
         
 
@@ -84,7 +99,6 @@ function initTimeSeries() {
                 });
             })
         }
-
 
         if (sector != "none") {
             dataArr = dataArr.filter(d => d[0].sector === sector)
@@ -151,12 +165,12 @@ function initTimeSeries() {
             .x(d => xScale(new Date(d.date_close)))
             .y(d => yScale(d.deltaClose));
         
-        console.log(line)
+        // console.log(line)
 
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
         
         // console.log(dataArr[0].map(d => xScale(new Date(d.date_close))))
-        console.log(dataArr[0].map(d => yScale(d.deltaClose)))
+        // console.log(dataArr[0].map(d => yScale(d.deltaClose)))
 
         // x Axis creation
         const xAxis = g.append("g")

@@ -178,3 +178,7 @@ a.paginate_button {
 .sunLabel {
   stroke: #222841;
 }
+
+#stock_data_info {
+  color: #c8cddc !important;
+}

@@ -1,7 +1,7 @@
 function initSun() {
 
 let width = document.getElementById("sunburstID").clientWidth;
-let height = width/1.2;
+let height = width/1;
 let margin = width/20;
 
 let radius = Math.min(width, height) / 6 - margin;
@@ -174,8 +174,8 @@ function update() {
         .attr("fill-opacity", d => +labelVisible(d.current))
         .attr("transform", d => labelTransform(d.current))
         .text(d => d.data.name)
-            .attr("font-size", 12)
-            .attr("class", "sunLabel");
+            .attr("font-size", 12);
+            // .attr("class", "sunLabel");
 
     const parent = svg.append("circle")
         .datum(root)
@@ -238,4 +238,6 @@ format = d3.format(",d")
 update()
 }
 initSun();
+
+
 

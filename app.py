@@ -53,7 +53,7 @@ def sunburst():
 
 @app.route("/max_date")
 def max_date():
-    return jsonify(parsed[1])
+    return jsonify(parsed[0])
 
 @app.route("/time_series")
 def time_series():
