@@ -6,6 +6,8 @@ Brodie Armstrong | Tanner Leivois | Tyler Ward
 
 ## Project Description:
 
+Deployed Project: https://stock-indices.herokuapp.com/
+
 The aim of this application was to accurately and succinctly depict data that was submitted as a final data for the ETL(Extract, Transform, Load) project. 
 
 Data was collected from a variety of sources and combined as a PostgreSQL database for future use. The database is hosted on heroku, and the application is deployed via the same methods.
