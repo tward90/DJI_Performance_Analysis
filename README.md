@@ -26,7 +26,7 @@ The donut chart or "sector breakdown" was created to display the individialu com
 
 ![Ideal1](static/images/Chart_Inspiration_1.png)
 ![Ideal2](static/images/Chart_Inspiration_2.png)
-![Ideal3](static/images/static/images/ideal_layout.png)
+![Ideal3](static/images/ideal_layout.png)
 * https://getbootstrap.com/docs/4.5/examples/dashboard/
 
 ## Additional Resources
