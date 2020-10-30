@@ -1,5 +1,5 @@
 # Project2_Team01
-Stock Information Information Visualization
+Stock Information Visualization
 
 ## Team Members:
 Brodie Armstrong | Tanner Leivois | Tyler Ward
