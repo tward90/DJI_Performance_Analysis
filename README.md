@@ -1,4 +1,4 @@
-# Project2_Team01
+# DJI_Performance_Analysis
 Stock Information Visualization
 
 ## Team Members:
