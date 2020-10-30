@@ -12,7 +12,7 @@ The aim of this application was to accurately and succinctly depict data that wa
 
 Data was collected from a variety of sources and combined as a PostgreSQL database for future use. The database is hosted on heroku, and the application is deployed via the same methods.
 
-The primary visualization depicts the performance of the 30 stocks that comprise the dow jones from 1-Jan-2017 through 7-Feb-2018, however the code was written to easliy allow for the furutre accomodation of constantly updated data. 
+The primary visualization depicts the performance of the 30 stocks that comprise the Dow Jones from 1-Jan-2017 through 7-Feb-2018, however the code was written to easily allow for the future accommodation of constantly updated data. 
 
 The tables at the bottom of the screens depict the data that is displayed in the chart above.
 
